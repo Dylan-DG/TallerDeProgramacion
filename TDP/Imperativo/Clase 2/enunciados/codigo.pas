@@ -56,7 +56,7 @@ End;
 
 procedure ImprimirVectorRecursivo (v: vector; dimL: integer);
 begin    
-     {-- Completar --}     
+  {-- Completar --}       
 end; 
     
 function Sumar (v: vector; dimL: integer): integer; 
@@ -77,7 +77,7 @@ end;
 
 function  ObtenerMaximo (v: vector; dimL: integer): integer;
 begin
-  {-- Completar --} 
+  {-- Completar --}
 end;     
      
 function  BuscarValor (v: vector; dimL, valor: integer): boolean;
@@ -96,11 +96,11 @@ var dimL, suma, maximo, valor: integer;
 Begin 
   CargarVector (v, dimL);
   writeln;
-  if (dimL = 0) then writeln ('--- Vector sin elementos ---')
+if (dimL = 0) then writeln ('--- Vector sin elementos ---')
                 else begin
                        ImprimirVector (v, dimL);
-                     {  ImprimirVectorRecursivo (v, dimL);}
-                     end;
+  {  ImprimirVectorRecursivo (v, dimL);}
+  end;
   writeln;
   writeln;                   
   suma:= Sumar(v, dimL);
