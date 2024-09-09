@@ -148,7 +148,6 @@ begin
 			if(v[pos]<v[j]) then
 				pos:=j;
 		end;
-		
 		item:=v[pos];
 		v[pos]:=v[i];
 		v[i]:=item;
