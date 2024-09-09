@@ -8,4 +8,5 @@ var
 
 begin
   {Programa principal}
-end.
+end. 
+ // completar luego
