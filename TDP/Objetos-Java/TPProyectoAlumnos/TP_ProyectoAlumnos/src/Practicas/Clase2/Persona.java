@@ -8,18 +8,18 @@ package Practicas.Clase2;
 import tema2.*;
 
 
-public class Persona1 {
+public class Persona {
     private String nombre;
     private int DNI;
     private int edad; 
     
-    public Persona1(String unNombre, int unDNI, int unaEdad){
+    public Persona(String unNombre, int unDNI, int unaEdad){
         nombre = unNombre;
         DNI = unDNI;
         edad = unaEdad; 
     }
     
-    public Persona1(){
+    public Persona(){
      
     }
 

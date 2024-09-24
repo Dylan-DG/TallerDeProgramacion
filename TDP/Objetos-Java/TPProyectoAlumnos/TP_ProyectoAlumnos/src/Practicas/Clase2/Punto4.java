@@ -20,7 +20,7 @@ public class Punto4 {
         
         int[] turnos = new int[5];
         boolean ok = true;
-        Persona1[][] casting = new Persona1[8][5];
+        Persona[][] casting = new Persona[8][5];
         
         do{
             System.out.print("ingrese un nombre: ");
@@ -39,7 +39,7 @@ public class Punto4 {
                 columnas--;
             
                 if(turnos[columnas]< 8){
-                    casting[turnos[columnas]][columnas]= new Persona1();
+                    casting[turnos[columnas]][columnas]= new Persona();
                     casting[turnos[columnas]][columnas].setNombre(nombre);
                     casting[turnos[columnas]][columnas].setDNI(dni);
                     casting[turnos[columnas]][columnas].setEdad(edad);

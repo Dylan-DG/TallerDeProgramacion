@@ -13,10 +13,10 @@ public class Punto3 {
         int cont = 0;
         int columnas =0;
         boolean ok;
-        Persona1[][] casting = new Persona1[8][5];
+        Persona[][] casting = new Persona[8][5];
         
         do{
-            casting[filas][columnas]= new Persona1();
+            casting[filas][columnas]= new Persona();
             
             System.out.print("ingrese un nombre: ");
             casting[filas][columnas].setNombre(Lector.leerString());

@@ -23,7 +23,7 @@ public class Punto1 {
         System.out.print("ingrese la edad: ");
         int edad = Lector.leerInt();
         
-        Persona1 alumno = new Persona1(nombre,dni,edad);
+        Persona alumno = new Persona(nombre,dni,edad);
         System.out.println(alumno.toString());
     }   
        

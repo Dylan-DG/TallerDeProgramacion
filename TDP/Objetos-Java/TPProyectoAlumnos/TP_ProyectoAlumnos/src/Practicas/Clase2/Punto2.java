@@ -25,14 +25,14 @@ public class Punto2 {
         int cantMayor65=0;
         int minDni = 999999999;
         int indicador =0;
-        Persona1[] vector= new Persona1[15];
+        Persona[] vector= new Persona[15];
         
         name = GeneradorAleatorio.generarString(10);
         dni = GeneradorAleatorio.generarInt(10000000);
         edad = GeneradorAleatorio.generarInt(100);  
         while(edad!=0 && dimL<15) //Carga la informacion de las personas
         {
-            vector[dimL] = new Persona1(name,dni,edad);
+            vector[dimL] = new Persona(name,dni,edad);
             name = GeneradorAleatorio.generarString(10);
             dni = GeneradorAleatorio.generarInt(10000000);
             edad = GeneradorAleatorio.generarInt(100);
