@@ -3,13 +3,11 @@ Clase Libro a la cual se agregaron constructores.
  */
 package tema3;
 
-/**
- *
- * @author vsanz
- */
+import Practicas.Clase3.Autor;
+
 public class Libro {
    private String titulo;
-   private String primerAutor; 
+   private Autor primerAutor; 
    private String editorial;
    private int añoEdicion;
    private String ISBN; 
@@ -17,11 +15,11 @@ public class Libro {
      
     
     public Libro(  String unTitulo,  String unaEditorial, 
-    int unAñoEdicion,  String unPrimerAutor, String unISBN, double unPrecio){
+    int unAñoEdicion,Autor unPrimerAutor, String unISBN, double unPrecio){
          titulo = unTitulo;
          editorial = unaEditorial; 
          añoEdicion= unAñoEdicion;
-         primerAutor = unPrimerAutor;
+         this.primerAutor= unPrimerAutor;
          ISBN =  unISBN;
          precio = unPrecio;
     }
@@ -30,7 +28,7 @@ public class Libro {
          titulo = unTitulo;
          editorial = unaEditorial; 
          añoEdicion= 2015;
-         primerAutor = unPrimerAutor;
+         primerAutor.setNombre(unPrimerAutor);
          ISBN =  unISBN;
          precio = 100;
     }
@@ -51,7 +49,7 @@ public class Libro {
     }
   
     public String getPrimerAutor(){
-        return primerAutor;
+        return primerAutor.ToString();
     } 
     public String getISBN(){
         return ISBN;
@@ -71,7 +69,7 @@ public class Libro {
          añoEdicion = unAño;
     }
    
-    public void setPrimerAutor(String unPrimerAutor){
+    public void setPrimerAutor(Autor unPrimerAutor){
          primerAutor=unPrimerAutor;
     } 
     public void setISBN(String unISBN){
@@ -85,7 +83,7 @@ public class Libro {
    @Override
     public String toString(){
         String aux;
-        aux= titulo + " por " + primerAutor + " - " + añoEdicion + " - " + " ISBN: " + ISBN;
+        aux= titulo + " por " + primerAutor.ToString() + " - " + añoEdicion + " - " + " ISBN: " + ISBN;
        return ( aux);
     }
         
