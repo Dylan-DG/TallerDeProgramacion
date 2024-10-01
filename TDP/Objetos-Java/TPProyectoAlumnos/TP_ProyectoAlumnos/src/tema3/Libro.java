@@ -24,11 +24,11 @@ public class Libro {
          precio = unPrecio;
     }
     
-    public Libro(  String unTitulo,  String unaEditorial, String unPrimerAutor, String unISBN){
+    public Libro(  String unTitulo,  String unaEditorial, Autor unPrimerAutor, String unISBN){
          titulo = unTitulo;
          editorial = unaEditorial; 
          añoEdicion= 2015;
-         primerAutor.setNombre(unPrimerAutor);
+         primerAutor=unPrimerAutor;
          ISBN =  unISBN;
          precio = 100;
     }
@@ -70,7 +70,7 @@ public class Libro {
     }
    
     public void setPrimerAutor(Autor unPrimerAutor){
-         primerAutor=unPrimerAutor;
+         this.primerAutor=unPrimerAutor;
     } 
     public void setISBN(String unISBN){
          ISBN=unISBN;
@@ -83,7 +83,7 @@ public class Libro {
    @Override
     public String toString(){
         String aux;
-        aux= titulo + " por " + primerAutor.ToString() + " - " + añoEdicion + " - " + " ISBN: " + ISBN;
+        aux= titulo + " por " + this.primerAutor.ToString() + " - " + añoEdicion + " - " + " ISBN: " + ISBN;
        return ( aux);
     }
         

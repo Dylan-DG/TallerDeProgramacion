@@ -3,10 +3,8 @@
  */
 package tema3;
 
-/**
- *
- * @author vsanz
- */
+import Practicas.Clase3.Autor;
+
 public class Demo01Libro {
 
     /**
@@ -14,10 +12,11 @@ public class Demo01Libro {
      */
     public static void main(String[] args) {
         Libro libro = new Libro();
+        Autor au = new Autor("a","b","a");
         libro.setTitulo("Java: A Beginner's Guide");
         libro.setEditorial("Mcgraw-Hill");
         libro.setAñoEdicion(2014);
-        libro.setPrimerAutor("Herbert Schildt");
+        libro.setPrimerAutor(au);
         libro.setISBN("978-0071809252");
         libro.setPrecio(21.72);
         System.out.println(libro.toString());
