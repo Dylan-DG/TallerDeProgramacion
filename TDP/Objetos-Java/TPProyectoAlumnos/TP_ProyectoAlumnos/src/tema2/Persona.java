@@ -20,7 +20,7 @@ public class Persona {
     public Persona(){
      
     }
-
+    
     public int getDNI() {
         return DNI;
     }

@@ -3,7 +3,7 @@ Demo que crea objetos Libro invocando a los constructores definidos.
  */
 package tema3;
 
-import Practicas.Clase3.Autor;
+import Practicas.Clase3.Punto2Autor.Autor;
 
 public class Demo01ConstructoresLibro {
 

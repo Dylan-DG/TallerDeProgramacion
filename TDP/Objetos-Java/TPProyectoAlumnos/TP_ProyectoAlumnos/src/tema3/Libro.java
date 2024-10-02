@@ -3,7 +3,7 @@ Clase Libro a la cual se agregaron constructores.
  */
 package tema3;
 
-import Practicas.Clase3.Autor;
+import Practicas.Clase3.Punto2Autor.Autor;
 
 public class Libro {
    private String titulo;
