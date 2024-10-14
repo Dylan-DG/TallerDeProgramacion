@@ -2,13 +2,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Practicas.Clase4.Punto5Dibujo;
+package Practicas.Parciales.Parcial1;
 
 /**
  *
  * @author Dylan
  */
-public class Punto5 {
-    
-    
+public class punto1 {
+    public static void main(){
+            
+    }
+        
 }
