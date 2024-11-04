@@ -40,5 +40,37 @@ public class Caja {
         this.ticketsMax = ticketsMax;
     }
     
+    public void agregarTicket(Ticket ticket){
+        if(this.cantTickets < this.getTicketsMax()){
+            tickets[this.cantTickets] = ticket;
+            this.cantTickets++;
+        }
+        else{
+            System.out.println("ya no se pueden agregar mas tickets");
+        }
+    }
     
+    public double LibrosVendidos(){
+        double total=0;
+        
+        for(int i=0;i<this.cantTickets;i++){
+            total+=tickets[i].getCantLibrosComprados();
+        }
+        
+        return total;
+    }
+    
+    public Ticket ticketMaxValor(){
+        double ticketMaxValor=0;
+        Ticket ticketmax = null;
+        
+        for(int i=0;i<this.cantTickets;i++){
+            if(this.tickets[i].getMonto()> ticketMaxValor ){
+                ticketMaxValor = this.tickets[i].getMonto();
+                ticketmax = this.tickets[i];
+            }
+        }
+        
+        return ticketmax;
+    }
 }

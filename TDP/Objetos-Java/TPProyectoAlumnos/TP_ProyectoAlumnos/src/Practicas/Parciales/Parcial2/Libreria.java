@@ -39,4 +39,26 @@ public class Libreria {
         this.numeroVentaActual = numeroVenta;
     }
     
+    public void generarTicket(int n,int dni,int cantLibros,double montoAbonado,String formaDePago){
+        Ticket ticket1 = new Ticket(this.getNumeroVentaActual(),dni,cantLibros,montoAbonado,formaDePago);
+        cajas[n].agregarTicket(ticket1);
+    }
+    
+    public void noDisponible(int x){
+        for(int i=0;i<4;i++){
+            if(cajas[i].LibrosVendidos()<x){
+                cajas[i].setDisponible(false);
+            }
+        }
+    }
+    
+    public Ticket ticketMaxLibreria(){
+        Ticket ticketMax = new Ticket(0,0,0,0,"a");
+        for(int i=0;i<4;i++){
+            if(cajas[i].ticketMaxValor().getMonto()> ticketMax.getMonto()){
+                ticketMax = cajas[i].ticketMaxValor();
+            }
+        }
+        return ticketMax;
+    }
 }
