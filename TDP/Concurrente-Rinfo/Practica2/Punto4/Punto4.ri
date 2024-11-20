@@ -1,0 +1,154 @@
+programa ejemplo
+procesos
+  proceso juntarFlores(ES cantFlores:numero)
+  comenzar
+    mientras(HayFlorEnLaEsquina)
+      tomarFlor
+      cantFlores:=cantFlores+1
+  fin
+  proceso juntarPapeles(ES cantPapeles:numero)
+  comenzar
+    mientras(HayPapelEnLaEsquina)
+      tomarPapel
+      cantPapeles:=cantPapeles+1
+  fin
+  proceso limpiarEsquina(ES cant:numero)
+  comenzar
+    juntarFlores(cant)
+    juntarPapeles(cant)
+  fin
+areas
+  ciudad: AreaC (1,1,100,24)
+  c: AreaPC (25,25,75,75)
+robots
+  robot robot1
+  variables
+    cant:numero
+    id:numero
+    cR:numero
+    aR:numero
+    ok:boolean
+    AV:numero
+    CA:numero
+    gane:numero
+  comenzar
+    AV:=PosAv
+    CA:=PosCa
+    RecibirMensaje(id,F1)
+    RecibirMensaje(ok,F1)
+    mientras(ok<>F)
+      RecibirMensaje(aR,F1)
+      RecibirMensaje(cR,F1)
+      Pos(aR,cR)
+      limpiarEsquina(cant)
+      Pos(AV,CA)
+      RecibirMensaje(ok,F1)
+    EnviarMensaje(id,F1)
+    EnviarMensaje(cant,F1)
+    RecibirMensaje(gane,F1)
+    si(gane = V)
+      Pos(50,50)   
+  fin
+  robot fiscalizador
+  variables
+    cantAx:numero
+    num:numero
+    calleR:numero
+    avR:numero
+    cant:numero
+    cantMax:numero
+    id:numero
+    idMax:numero
+  comenzar
+    cantAx:=10   
+    EnviarMensaje(1,R1)
+    EnviarMensaje(2,R2)
+    EnviarMensaje(3,R3)
+    EnviarMensaje(4,R4)    
+    mientras(cantAx<>0)    
+      Random(num,1,4)
+      Random(avR,25,75)
+      Random(calleR,25,75)
+      si(num = 1)
+        EnviarMensaje(V,R1)
+        EnviarMensaje(avR,R1)
+        EnviarMensaje(calleR,R1)
+      sino
+        si(num = 2)
+          EnviarMensaje(V,R2)
+          EnviarMensaje(avR,R2)
+          EnviarMensaje(calleR,R2)
+        sino
+          si(num = 3)
+            EnviarMensaje(V,R3)
+            EnviarMensaje(avR,R3)
+            EnviarMensaje(calleR,R3)
+          sino
+            EnviarMensaje(V,R4)
+            EnviarMensaje(avR,R4)
+            EnviarMensaje(calleR,R4)
+      cantAx:=cantAx-1
+    EnviarMensaje(F,R1)
+    EnviarMensaje(F,R2)
+    EnviarMensaje(F,R3)     
+    EnviarMensaje(F,R4)
+    repetir 4
+      RecibirMensaje(id,*)
+      si(id = 1)
+        RecibirMensaje(cant,R1)
+      sino
+        si(id=2)
+          RecibirMensaje(cant,R2)
+        sino
+          si(id=3)
+            RecibirMensaje(cant,R3)
+          sino
+            RecibirMensaje(cant,R4)
+      si(cant>cantMax)
+        idMax:=id
+        cantMax:=cant
+    si(idMax = 1)
+      EnviarMensaje(V,R1)
+      EnviarMensaje(F,R2)
+      EnviarMensaje(F,R3)
+      EnviarMensaje(F,R4)
+    sino
+      si(idMax=2)
+        EnviarMensaje(V,R2)
+        EnviarMensaje(F,R1)
+        EnviarMensaje(F,R3)
+        EnviarMensaje(F,R4)
+      sino
+        si(idMax=3)
+          EnviarMensaje(V,R3)
+          EnviarMensaje(F,R2)
+          EnviarMensaje(F,R1)
+          EnviarMensaje(F,R4)
+        sino
+          EnviarMensaje(V,R4)
+          EnviarMensaje(F,R2)
+          EnviarMensaje(F,R3)
+          EnviarMensaje(F,R1)
+  fin
+variables
+  R1: robot1
+  R2: robot1
+  R3: robot1
+  R4: robot1
+  F1:fiscalizador
+comenzar
+  AsignarArea(R1, c)
+  AsignarArea(R2, c)
+  AsignarArea(R3, c)
+  AsignarArea(R4, c)
+  AsignarArea(R1, ciudad)
+  AsignarArea(R2, ciudad)
+  AsignarArea(R3, ciudad)
+  AsignarArea(R4, ciudad)
+  AsignarArea(F1, ciudad)
+  Iniciar(R1, 25,1)
+  Iniciar(R2, 30,1)
+  Iniciar(R3, 35,1)
+  Iniciar(R4, 40,1)
+  Iniciar(F1, 1,1)
+fin

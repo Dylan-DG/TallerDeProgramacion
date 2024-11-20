@@ -1,0 +1,67 @@
+programa ejemplo
+procesos
+  proceso juntarFlores
+  comenzar
+    mientras(HayFlorEnLaEsquina)
+      tomarFlor
+  fin
+  proceso juntarPapeles
+  comenzar
+    mientras(HayPapelEnLaEsquina)
+      tomarPapel
+  fin
+  proceso juntar
+  comenzar
+    si((PosAv>=1) & (PosAv<=25)) | ((PosAv>=51) & (PosAv<=75))
+      juntarFlores
+    sino
+      juntarPapeles
+      
+  fin
+  proceso RecorrerAvenidas
+  comenzar
+    repetir 24
+      repetir 99
+        juntar
+        mover
+      juntar  
+      Pos(PosAv+1,1) 
+    repetir 99
+      juntar
+      mover  
+    juntar  
+  fin
+  proceso RecorrerAreas
+  variables
+    num :numero
+    cantMax:numero
+  comenzar
+    cantMax:=2
+    num:= 1
+    repetir 2
+      RecorrerAvenidas
+      si(num < cantMax)
+        num:=num+1
+        Pos(PosAv+26,1)
+  fin
+areas
+  Area1: AreaC (1,1,25,100)
+  Area2: AreaC (26,1,50,100)  
+  Area3: AreaC (51,1,75,100) 
+  Area4: AreaC (76,1,100,100) 
+robots
+  robot robot1
+  comenzar
+    RecorrerAreas
+  fin
+variables
+  R1: robot1
+  R2: robot1
+comenzar
+  AsignarArea(R1, Area1)
+  AsignarArea(R1, Area3)
+  AsignarArea(R2, Area2)  
+  AsignarArea(R2, Area4)
+  Iniciar(R1, 1,1)
+  Iniciar(R2, 26,1)
+fin

@@ -1,0 +1,92 @@
+programa P1D
+procesos
+  proceso juntarFlores(ES cantFlores:numero)
+  comenzar
+    mientras(HayFlorEnLaEsquina)
+      tomarFlor
+      cantFlores:=cantFlores+1
+  fin
+  proceso recorrerAvenida(E numCalles: numero;ES cantFlores:numero)
+  comenzar
+    repetir (numCalles - 1)
+      juntarFlores(cantFlores)
+      mover
+    juntarFlores(cantFlores)
+  fin
+areas
+  ciudad: AreaC (1,1,100,100)
+robots
+  robot robot1
+  variables
+    cantFlores:numero
+    diferencia:numero
+    id:numero
+  comenzar
+    RecibirMensaje(id,Fiscalizador)
+    recorrerAvenida(10,cantFlores)
+    EnviarMensaje(id,Fiscalizador)
+    EnviarMensaje(cantFlores,Fiscalizador)
+  fin 
+  robot robot2
+  variables
+    cantMax:numero
+    id:numero
+    idMax:numero
+    cant:numero
+  comenzar
+    EnviarMensaje(1,R1)
+    EnviarMensaje(2,R2)
+    EnviarMensaje(3,R3)
+    EnviarMensaje(4,R4)    
+    EnviarMensaje(5,R5)
+    EnviarMensaje(6,R6)
+    
+    repetir 6
+      RecibirMensaje(id,*)
+      si(id=1)
+        RecibirMensaje(cant,R1)
+      sino
+        si(id=2)
+          RecibirMensaje(cant,R2)
+        sino
+          si(id=3)
+            RecibirMensaje(cant,R3)
+          sino
+            si(id=4)
+              RecibirMensaje(cant,R4)
+            sino
+              si(id=5)
+                RecibirMensaje(cant,R5)
+              sino
+                si(id=6)
+                  RecibirMensaje(cant,R6)
+      si(cant>cantMax)
+        idMax:=id  
+        cantMax:=cant
+    Informar("Robot ganador es ",idMax)
+    Informar("cantidad Flores ",cantMax)
+  fin
+variables
+  R1: robot1
+  R2: robot1
+  R3: robot1
+  R4: robot1
+  R5: robot1
+  R6: robot1
+  Fiscalizador: robot2
+comenzar
+  AsignarArea(R1,ciudad)
+  AsignarArea(R2, ciudad)
+  AsignarArea(R3, ciudad)
+  AsignarArea(R4, ciudad)
+  AsignarArea(R5, ciudad)
+  AsignarArea(R6, ciudad)
+  AsignarArea(Fiscalizador,ciudad)
+  Iniciar(Fiscalizador,2,1)
+  Iniciar(R1, 1,1)
+  Iniciar(R2, 2,11)
+  Iniciar(R3, 3,21)
+  Iniciar(R4, 4,31)
+  Iniciar(R5, 5,41)
+  Iniciar(R6, 6,51)
+fin

@@ -1,0 +1,61 @@
+programa P1C
+procesos
+  proceso juntarFlores(ES cantFlores:numero)
+  comenzar
+    mientras(HayFlorEnLaEsquina)
+      tomarFlor
+      cantFlores:=cantFlores+1
+  fin
+  proceso recorrerAvenida(E numCalles: numero;ES cantFlores:numero)
+  comenzar
+    repetir (numCalles - 1)
+      juntarFlores(cantFlores)
+      mover
+    juntarFlores(cantFlores)
+  fin
+areas
+  ciudad: AreaC (1,1,100,100)
+robots
+  robot robot1
+  variables
+    cantFlores:numero
+    diferencia:numero
+  comenzar
+    recorrerAvenida(10,cantFlores)
+    EnviarMensaje(cantFlores,Fiscalizador)
+  fin 
+  robot robot2
+  variables
+    cantMax:numero
+    cant:numero
+  comenzar
+    repetir 6
+      RecibirMensaje(cant,*)
+      si(cant>cantMax)
+        cantMax:=cant
+    Informar("cant flores ",cantMax)
+  fin
+variables
+  R1: robot1
+  R2: robot1
+  R3: robot1
+  R4: robot1
+  R5: robot1
+  R6: robot1
+  Fiscalizador: robot2
+comenzar
+  AsignarArea(R1,ciudad)
+  AsignarArea(R2, ciudad)
+  AsignarArea(R3, ciudad)
+  AsignarArea(R4, ciudad)
+  AsignarArea(R5, ciudad)
+  AsignarArea(R6, ciudad)
+  AsignarArea(Fiscalizador,ciudad)
+  Iniciar(Fiscalizador,2,1)
+  Iniciar(R1, 1,1)
+  Iniciar(R2, 2,11)
+  Iniciar(R3, 3,21)
+  Iniciar(R4, 4,31)
+  Iniciar(R5, 5,41)
+  Iniciar(R6, 6,51)
+fin

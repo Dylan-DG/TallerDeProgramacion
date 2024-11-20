@@ -1,0 +1,44 @@
+programa C2P1A
+procesos
+  proceso juntarFlores(ES cantFlores:numero)
+  comenzar
+    mientras(HayFlorEnLaEsquina)
+      tomarFlor
+      cantFlores:=cantFlores+1
+  fin
+  proceso recorrerAvenida(E numCalles: numero;ES cantFlores:numero)
+  comenzar
+    repetir (numCalles - 1)
+      juntarFlores(cantFlores)
+      mover
+    juntarFlores(cantFlores)
+  fin
+areas
+  ciudad: AreaC (1,1,50,50)
+robots
+  robot robot1
+  variables
+    cantFlores:numero
+    cant2:numero
+    diferencia:numero
+  comenzar
+    recorrerAvenida(10,cantFlores)
+    si(PosAv=1)
+      EnviarMensaje(cantFlores,R2)
+      RecibirMensaje(cant2,*)
+    sino
+      EnviarMensaje(cantFlores,R1)
+      RecibirMensaje(cant2,*)
+    si(cantFlores>cant2)
+      diferencia:=cantFlores-cant2
+      Informar("gane y la diferencia es de ",diferencia)
+  fin
+variables
+  R1: robot1
+  R2: robot1
+comenzar
+  AsignarArea(R2,ciudad)
+  AsignarArea(R1, ciudad)
+  Iniciar(R1, 1,1)
+  Iniciar(R2,2,11)
+fin

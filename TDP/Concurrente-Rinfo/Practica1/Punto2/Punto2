@@ -1,0 +1,71 @@
+programa ejemplo
+procesos
+  proceso recorrerCuadrado(ES cantPapeles:numero)
+  comenzar
+    repetir 4
+      repetir 20
+        si(HayPapelEnLaEsquina)
+          juntarPapeles(cantPapeles)
+        mover
+      si(HayPapelEnLaEsquina)
+        juntarPapeles(cantPapeles)
+      derecha
+        
+  fin
+  proceso juntarPapeles(ES CantPapeles:numero)
+  comenzar
+    mientras(HayPapelEnLaEsquina)
+      tomarPapel
+      CantPapeles:= CantPapeles +1
+  fin
+  proceso izquierda
+  comenzar
+    repetir 3
+      derecha
+  fin
+areas
+  ciudad: AreaC (10,10,30,30)
+robots
+  robot robot1
+  variables
+    cantPapeles :numero
+  comenzar
+    recorrerCuadrado(cantPapeles)
+  fin
+  robot robot2
+  variables
+    cantPapeles :numero
+  comenzar
+    derecha
+    recorrerCuadrado(cantPapeles)
+  fin
+  robot robot3
+  variables
+    cantPapeles :numero
+  comenzar
+    repetir 2
+      derecha
+    recorrerCuadrado(cantPapeles)
+  fin
+  robot robot4
+  variables
+    cantPapeles :numero
+  comenzar
+    izquierda
+    recorrerCuadrado(cantPapeles)
+  fin
+variables
+  R1: robot1
+  R2: robot2
+  R3: robot3
+  R4: robot4
+comenzar
+  AsignarArea(R1, ciudad)
+  AsignarArea(R2, ciudad)
+  AsignarArea(R3, ciudad)
+  AsignarArea(R4, ciudad)
+  Iniciar(R1, 10,10)
+  Iniciar(R2, 10,30)
+  Iniciar(R3, 30,30)
+  Iniciar(R4, 30,10)
+fin

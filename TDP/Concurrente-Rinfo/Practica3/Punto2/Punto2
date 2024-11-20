@@ -1,0 +1,122 @@
+{Bienvenidos al entorno CMRE.
+Lo siguiente es un código de ejemplo que implementa un
+proceso que recibe un número de avenida como parámetro,
+se posiciona en esa avenida y la recorre.}
+
+programa ejemplo
+procesos
+  proceso juntarFlores(ES cantFlores:numero)
+  comenzar
+    mientras(HayFlorEnLaEsquina)
+      tomarFlor
+      cantFlores:=cantFlores+1
+  fin
+  proceso juntarPapeles(ES cantPapeles:numero)
+  comenzar
+    mientras(HayPapelEnLaEsquina)
+      tomarPapel
+      cantPapeles:=cantPapeles+1
+  fin
+  proceso izquierda
+  comenzar
+    repetir 3
+      derecha
+  fin
+  proceso escalon(E altura:numero;E ancho:numero;E id:numero;ES cant:numero)
+  comenzar
+    repetir altura
+      mover
+    si(id = 1)
+      derecha
+      juntarFlores(cant)
+    sino 
+      izquierda
+      juntarPapeles(cant)
+    repetir ancho
+      mover
+    si(id = 2)
+      derecha
+    sino
+      izquierda
+  fin
+  proceso escalonInvert(E altura:numero;E ancho:numero;E id:numero;ES cant:numero)
+  comenzar
+    repetir altura
+      mover
+    si(id = 1)
+      derecha
+      juntarFlores(cant)
+    sino 
+      izquierda
+      juntarPapeles(cant)
+    repetir ancho
+      mover
+    si(id = 2)
+      derecha
+    sino
+      izquierda
+  fin
+  proceso recorrerPista(ES cant:numero;E id:numero)
+  variables
+    R:numero
+  comenzar
+    R:=5
+    repetir 5
+      si(R = 1)
+        BloquearEsquina(16,16)
+      escalon(R,R,id,cant)
+      si(R = 1)
+        si(id=1)
+          izquierda
+        sino 
+          derecha
+        mover
+        LiberarEsquina(16,16)         
+      R:=R-1
+    R:=2
+    repetir 4
+      escalonInvert(R,R,id,cant)
+      R:=R+1
+  fin
+areas
+  ciudad: AreaC (1,1,100,100)
+robots
+  robot robot1
+  variables
+    cant:numero
+    ID:numero
+  comenzar
+    RecibirMensaje(ID,J)
+    recorrerPista(cant,ID)
+    EnviarMensaje(ID,J)
+    EnviarMensaje(cant,J)
+  fin
+  robot juez
+  variables
+    id:numero
+    cant:numero
+  comenzar
+    EnviarMensaje(1,R1)
+    EnviarMensaje(2,R2)
+    RecibirMensaje(id,*)
+    si(id = 1)
+      RecibirMensaje(cant,R1)
+      Informar(id)
+      Informar(cant)
+    sino
+      RecibirMensaje(cant,R2)
+      Informar(id)
+      Informar(cant)
+  fin
+variables
+  R1: robot1
+  R2: robot1
+  J:juez
+comenzar
+  AsignarArea(R1, ciudad)
+  AsignarArea(R2, ciudad)
+  AsignarArea(J, ciudad)
+  Iniciar(R1, 1,1)
+  Iniciar(R2, 31,1)
+  Iniciar(J, 15,1)
+fin
