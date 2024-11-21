@@ -1,0 +1,139 @@
+programa ejemplo
+procesos
+  proceso juntarFlores
+  comenzar
+    mientras(HayFlorEnLaEsquina)
+      tomarFlor
+  fin
+  proceso juntarPapeles
+  comenzar
+    mientras(HayPapelEnLaEsquina)
+      tomarPapel
+  fin
+  proceso recorrerPerimetro(E lado:numero;E id:numero)
+  comenzar
+    repetir 4
+      repetir lado    
+        mover
+        si(id=1)
+          juntarFlores
+          si(PosAv=6)&(PosCa = 8) 
+            LiberarEsquina(5,8)
+          si(PosAv=4)&(PosCa = 8) 
+            BloquearEsquina(5,8)
+          si(PosAv=8)&(PosCa = 4) 
+            LiberarEsquina(8,5)
+          si(PosAv=8)&(PosCa = 6) 
+            BloquearEsquina(8,5)
+        sino
+          si(id=2)
+            juntarFlores
+            juntarPapeles
+            si(PosAv = 5)
+              si(PosAv=5)&(PosCa = 9) 
+                LiberarEsquina(5,8)
+              si(PosAv=5)&(PosCa = 7) 
+                BloquearEsquina(5,8)
+            si(PosCa=5)
+              si(PosAv=7)&(PosCa = 5) 
+                LiberarEsquina(8,5)
+              si(PosAv=9)&(PosCa = 5) 
+                BloquearEsquina(8,5)
+            si(PosCa = 15)
+              si(PosAv=8)&(PosCa=15)
+                BloquearEsquina(9,15)
+              si(PosAv=10)&(PosCa = 15)
+                LiberarEsquina(9,15)
+            si(PosAv = 15)
+              si(PosAv=15)&(PosCa=10)
+                BloquearEsquina(15,9)
+              si(PosAv=15)&(PosCa = 11)
+                LiberarEsquina(15,9)
+          sino
+            juntarPapeles
+            si(PosAv=9)&(PosCa = 16) 
+              LiberarEsquina(9,15)
+            si(PosAv=9)&(PosCa = 14) 
+              BloquearEsquina(9,15)
+            si(PosAv=14)&(PosCa = 9) 
+              LiberarEsquina(15,9)
+            si(PosAv=16)&(PosCa = 9) 
+              BloquearEsquina(15,9)
+      derecha
+  fin
+  proceso depositarCalle(E id:numero)
+  comenzar
+    si(id=1)
+      mientras(HayFlorEnLaBolsa)
+        depositarFlor
+        mover
+    sino
+      si(id=2)
+        mientras(HayFlorEnLaBolsa)&(HayPapelEnLaBolsa)
+          depositarFlor
+          depositarPapel
+          mover
+      sino
+        mientras(HayPapelEnLaBolsa)
+          depositarPapel
+          mover
+  fin
+areas
+  cuadrante1: AreaC(1,1,100,100)
+robots
+  robot robot1
+  variables
+    pos:numero
+    lado:numero
+    id:numero
+    ca:numero
+  comenzar
+    RecibirMensaje(id,fisc)
+    RecibirMensaje(lado,fisc)
+    recorrerPerimetro(lado,id)
+    EnviarMensaje(id,fisc)
+    RecibirMensaje(ca,fisc)
+    Pos(1,ca)
+    derecha
+    depositarCalle(id)
+  fin
+  robot fiscalizador
+  variables
+    num:numero
+    id:numero
+  comenzar
+    num:=20
+    EnviarMensaje(1,R1)
+    EnviarMensaje(2,R2)
+    EnviarMensaje(3,R3)
+    
+    EnviarMensaje(6,R1)
+    EnviarMensaje(10,R2)
+    EnviarMensaje(7,R3)
+    
+    mientras(num<=22)
+      RecibirMensaje(id,*)
+      si(id=1)
+        EnviarMensaje(num,R1)
+      sino
+        si(id=2)
+          EnviarMensaje(num,R2)
+        sino
+          EnviarMensaje(num,R3)
+      num:=num+1
+  fin
+variables
+  R1: robot1
+  R2: robot1
+  R3: robot1
+  fisc:fiscalizador
+comenzar
+  AsignarArea(R1, cuadrante1)
+  AsignarArea(R2, cuadrante1)
+  AsignarArea(R3, cuadrante1)
+  AsignarArea(fisc, cuadrante1)
+  Iniciar(R1, 2,2)
+  Iniciar(R2, 5,5)
+  Iniciar(R3, 9,9)
+  Iniciar(fisc, 1,1)
+fin
