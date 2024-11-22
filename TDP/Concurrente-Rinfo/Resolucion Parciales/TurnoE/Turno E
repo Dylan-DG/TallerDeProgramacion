@@ -1,0 +1,101 @@
+programa ejemplo
+procesos
+  proceso depositarFlores
+  comenzar
+    mientras(HayFlorEnLaBolsa)
+      depositarFlor
+  fin
+  proceso juntarFlores
+  comenzar
+    mientras(HayFlorEnLaEsquina)
+      tomarFlor
+  fin
+  proceso cuadrado(E lado:numero;ES cantEsquinas:numero)
+  comenzar
+    repetir 4
+      repetir lado
+        mover
+        cantEsquinas:=cantEsquinas+1
+        juntarFlores
+      derecha
+  fin
+areas
+  almacen: AreaPC (50,50,50,50)
+  Area1: AreaP(1,1,6,100)
+  Area2: AreaP(7,1,13,100)
+  Area3: AreaP(14,1,20,100)
+  Area4: AreaP(51,51,51,51)
+robots
+  robot robot1
+  variables
+    lado:numero
+    cantEsquinas:numero
+    id:numero
+    sig:numero
+    av:numero
+    ca:numero
+  comenzar
+    av:=PosAv
+    RecibirMensaje(id,cord)
+    repetir 3
+      Random(lado,1,4)
+      cuadrado(lado,cantEsquinas)
+      ca:=PosCa
+      BloquearEsquina(50,50)
+      Pos(50,50)
+      depositarFlores
+      Pos(av,ca)
+      LiberarEsquina(50,50)
+      sig:=ca+lado+1
+      Pos(av,sig)
+    EnviarMensaje(V,cord)
+    EnviarMensaje(id,cord)
+    EnviarMensaje(cantEsquinas,cord)
+    Informar(cantEsquinas)
+  fin
+  robot robot2
+  variables
+    ok:boolean
+    maxEsquinas:numero
+    esquinas:numero
+    id:numero
+    idMax:numero
+  comenzar
+    EnviarMensaje(1,R1)
+    EnviarMensaje(2,R2)
+    EnviarMensaje(3,R3)   
+    RecibirMensaje(ok,R1)
+    RecibirMensaje(ok,R2)
+    RecibirMensaje(ok,R3)    
+    repetir 3
+      RecibirMensaje(id,*)
+      si(id=1)
+        RecibirMensaje(esquinas,R1)
+      sino
+        si(id=2)
+          RecibirMensaje(esquinas,R2)
+        sino
+          RecibirMensaje(esquinas,R3)
+      si(esquinas > maxEsquinas)
+        maxEsquinas:=esquinas
+        idMax:=id
+    Informar("ganador es ",idMax)
+  fin
+variables
+  R1:robot1
+  R2:robot1
+  R3:robot1
+  cord:robot2
+comenzar
+  AsignarArea(R1, Area1)
+  AsignarArea(R2, Area2)
+  AsignarArea(R3, Area3)
+  AsignarArea(R1, almacen)
+  AsignarArea(R2, almacen)
+  AsignarArea(R3, almacen)
+  AsignarArea(cord, Area4)
+  Iniciar(R1, 1,1)
+  Iniciar(R2, 7,1)
+  Iniciar(R3, 14,1)
+  Iniciar(cord, 51,51)
+fin

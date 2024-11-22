@@ -1,0 +1,78 @@
+programa ejemplo
+areas
+  reco1: AreaP (5,1,5,100)
+  reco2: AreaP (10,1,10,100)
+  almacen: AreaC(50,50,50,50)
+  consu1: AreaP (11,1,11,1)
+  consu2: AreaP (12,1,12,1)
+robots
+  robot productor
+  variables
+    cantPapeles:numero
+    av:numero
+    ca:numero
+  comenzar
+    repetir 100
+      mientras(HayPapelEnLaEsquina)&(cantPapeles<5)
+        tomarPapel
+        cantPapeles:=cantPapeles+1
+      si(cantPapeles= 5)
+        cantPapeles:=0
+        av:=PosAv
+        ca:=PosCa
+        BloquearEsquina(50,50)
+        Pos(50,50)
+        repetir 5
+          depositarPapel
+        Pos(av,ca)
+        LiberarEsquina(50,50)
+      si(PosCa<100)
+        mover  
+  fin
+  robot consumidor
+  variables
+    cant:numero
+    av:numero
+    ca:numero
+    cantR:numero
+    cont:numero
+  comenzar
+    av:=PosAv
+    ca:=PosCa
+    cant:=0
+    cont:=0
+    mientras(cant<8)
+      Random(cantR,2,5)
+      BloquearEsquina(50,50)
+      Pos(50,50)
+      cont:=0
+      repetir 5
+        si(HayPapelEnLaEsquina)
+          tomarPapel
+          cont:=cont+1
+      Pos(av,ca)
+      LiberarEsquina(50,50)
+      si(cont=cantR)
+        cant:=0
+      sino
+        cant:=cant+1
+  fin
+variables
+  P1: productor
+  P2: productor
+  C1: consumidor
+  C2: consumidor
+comenzar
+  AsignarArea(P1, reco1)
+  AsignarArea(P2, reco2)
+  AsignarArea(C1, consu1)
+  AsignarArea(C2, consu2)
+  AsignarArea(P1, almacen)
+  AsignarArea(P2, almacen)
+  AsignarArea(C1, almacen)
+  AsignarArea(C2, almacen)
+  Iniciar(P1, 5,1)
+  Iniciar(P2, 10,1)
+  Iniciar(C1, 11,1)
+  Iniciar(C2, 12,1)
+fin
